@@ -3,39 +3,66 @@ import type { Metadata } from 'next'
 export const SITE_CONFIG = {
   name: 'PEPECARD Official',
   shortName: 'PEPECARD',
-  url: 'https://pepecard.mobi',
+  /** Primary public domain – all canonical URLs are built from this */
+  url: 'https://pepecard.store',
   locale: 'en_US',
   twitter: '@pepecard',
-  defaultTitle: 'PEPECARD Official Login | Buy Pepecards & Crypto CC',
+  defaultTitle: 'PEPECARD Official | Buy Pepecards & Crypto CC | pepecard.store',
   defaultDescription:
-    'Welcome to the absolute official platform for PEPECARD. Securely login to pepecard.mobi or pepecards.cc. Verify your secondary password, explore the deepest credit card dumps, CC bases, world mixes, and premium crypto trading cards today.',
+    'PEPECARD Official – the premier marketplace for crypto trading cards, CC bases, world card mixes and refundable digital assets. Login securely at pepecard.store and explore verified bases from top sellers worldwide.',
   keywords: [
+    // Brand
     'PEPECARD',
     'pepecard',
     'pepecards',
+    'pepecard official',
+    'pepecard store',
+    'pepecard.store',
+    // Domains / mirrors
+    'pepecard.mobi',
+    'pepecard mobi',
+    'pepe.mobi',
+    'pepecard zip',
+    'pepecard.zip',
+    'pepecards.cc',
+    'pepecard cc',
+    // Auth
     'pepecard login',
     'pepecards login',
-    'pepecard .mobi',
-    'pepecard mobi',
-    'pepecard cc',
-    'pepecard official',
+    'login pepecard',
+    'pepecard sign in',
+    'pepe mobi login',
+    'secure login pepecard',
+    'pepecard portal',
+    // Market / product
     'pepecard news',
     'pepecard updates',
     'pepecard market',
-    'pepecard crypto',
-    'pepecard trading',
+    'pepecard announcements',
+    'pepecard seller',
+    'buy pepecard',
+    'buy pepecards',
+    'cc base',
+    'credit dump',
+    'credit card dumps',
+    'world mix cards',
+    'refundable cc',
+    'pepe market',
     'cards market',
     'market analysis',
-    'security updates',
-    'trading platform',
+    // Crypto
+    'pepecard crypto',
+    'pepecard trading',
     'crypto trading card',
     'digital assets',
     'pepe crypto',
-    'buy pepecard',
     'secure crypto platform',
     'pepecard web3',
     'pepecard defi',
     'best crypto cards',
+    // Generic
+    'trading platform',
+    'security updates',
   ],
   ogImage: '/og-image.png',
 } as const
@@ -100,9 +127,26 @@ export function organizationJsonLd() {
     '@type': 'Organization',
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.url,
-    logo: new URL('/rectangle-logo.png', SITE_CONFIG.url).toString(),
+    logo: {
+      '@type': 'ImageObject',
+      url: new URL('/rectangle-logo.png', SITE_CONFIG.url).toString(),
+      width: 200,
+      height: 60,
+    },
     description: SITE_CONFIG.defaultDescription,
-    sameAs: ['https://t.me/PepeServicePepe'],
+    sameAs: [
+      'https://pepecard.store',
+      'https://www.pepecard.store',
+      'https://pepecard.mobi',
+      'https://pepe.mobi',
+      'https://pepecard.zip',
+      'https://t.me/PepeServicePepe',
+    ],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      url: 'https://t.me/PepeServicePepe',
+    },
   }
 }
 
@@ -132,5 +176,38 @@ export function webPageJsonLd(input: { title: string; description: string; path:
     url,
     isPartOf: { '@type': 'WebSite', name: SITE_CONFIG.name, url: SITE_CONFIG.url },
     inLanguage: 'en',
+    dateModified: new Date().toISOString(),
+  }
+}
+
+/**
+ * BreadcrumbList JSON-LD for inner pages.
+ * @param items - ordered array of { name, path } breadcrumb items
+ */
+export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: new URL(item.path, SITE_CONFIG.url).toString(),
+    })),
+  }
+}
+
+/**
+ * FAQ JSON-LD – useful for news / announcement pages to capture rich results.
+ */
+export function faqJsonLd(faqs: { question: string; answer: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
   }
 }
