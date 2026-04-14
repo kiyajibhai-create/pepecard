@@ -20,6 +20,7 @@ export const SITE_CONFIG = {
     'pepecard.store',
     // Domains / mirrors
     'pepecard.mobi',
+    'pepecard store official',
     'pepecard mobi',
     'pepe.mobi',
     'pepecard zip',
@@ -108,16 +109,16 @@ export function buildMetadata(input: SeoInput = {}): Metadata {
     robots: input.noIndex
       ? { index: false, follow: false }
       : {
+        index: true,
+        follow: true,
+        googleBot: {
           index: true,
           follow: true,
-          googleBot: {
-            index: true,
-            follow: true,
-            'max-video-preview': -1,
-            'max-image-preview': 'large',
-            'max-snippet': -1,
-          },
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
         },
+      },
   }
 }
 
@@ -136,8 +137,8 @@ export function organizationJsonLd() {
     description: SITE_CONFIG.defaultDescription,
     sameAs: [
       'https://pepecard.store',
+      'https://www.pepecard.store/',
       'https://www.pepecard.store',
-      'https://pepecard.mobi',
       'https://pepe.mobi',
       'https://pepecard.zip',
       'https://t.me/PepeServicePepe',

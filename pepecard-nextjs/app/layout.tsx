@@ -47,22 +47,12 @@ export default function RootLayout({
   return (
     <html lang="en" style={{ fontSize: '14px' }}>
       <head>
-        <link rel="preconnect" href="https://pepecard.mobi" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://pepecard.mobi" />
+        <link rel="preconnect" href="https://pepecard.store" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://pepecard.store" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         {EXTERNAL_STYLESHEETS.map((href) => (
-          <link key={href} rel="stylesheet" href={href} media="print" data-swap="1" />
+          <link key={href} rel="stylesheet" href={href} />
         ))}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){var ls=document.querySelectorAll('link[data-swap="1"]');ls.forEach(function(l){if(l.sheet){l.media='all';return;}l.addEventListener('load',function(){l.media='all';});});})();`,
-          }}
-        />
-        <noscript>
-          {EXTERNAL_STYLESHEETS.map((href) => (
-            <link key={href} rel="stylesheet" href={href} />
-          ))}
-        </noscript>
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
       </head>

@@ -206,7 +206,7 @@ export default function LoginPage() {
 
         <style jsx global>{`
           .passphrase-container[data-v-5c7dfcf3] {
-            background: url('https://pepecard.mobi/assets/register-bg-cgbfI5jC.jpg') no-repeat;
+            background: url('/assets/register-bg-cgbfI5jC.jpg') no-repeat;
             background-size: 100% 100%;
             min-width: 100vw;
             min-height: 100vh;
@@ -387,7 +387,7 @@ export default function LoginPage() {
                   <button data-v-1e97eb9e className="arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-large arco-btn-status-normal flex-1 uppercase noto-sans" type="submit">
                     login
                   </button>
-                  <button data-v-1e97eb9e className="arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-large arco-btn-status-normal flex-1 uppercase noto-sans" type="button">
+                  <button data-v-1e97eb9e className="arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-large arco-btn-status-normal flex-1 uppercase noto-sans" type="button" onClick={() => router.push('/register')}>
                     register
                   </button>
                 </div>

@@ -476,12 +476,12 @@ export default function NewsPage() {
 
                               <p style={{ fontSize: '24px', marginBottom: '20px' }}>
                                 <a
-                                  href="https://pepecard.mobi"
+                                  href="https://pepecard.store"
                                   target="_blank"
                                   rel="noreferrer"
                                   style={{ color: '#1a73e8' }}
                                 >
-                                  pepecard.mobi
+                                  pepecard.store
                                 </a>
                                 &nbsp; - &nbsp;
                                 <a
