@@ -16,7 +16,6 @@ export const metadata: Metadata = buildMetadata({
     'login pepecard',
     'pepecard official login',
     'pepecard cc sign in',
-    'pepe mobi login',
     'pepecard zip',
     'secure login pepecard',
     'pepecard portal',

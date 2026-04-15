@@ -3,44 +3,42 @@ import { SITE_CONFIG } from '@/lib/seo'
 
 /**
  * Next.js dynamic sitemap – served at /sitemap.xml
- * Domain: pepecard.store
- *
- * Priority guide:
- *  1.0  – Homepage / landing
- *  0.9  – High-traffic hub pages (news, market)
- *  0.8  – Auth entry points that drive conversion (login)
- *  0.6  – Supporting pages (register, about)
+ * Domain: www.pepecard.store
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
+  const base = SITE_CONFIG.url
 
   return [
-    // ── Root ──────────────────────────────────────────────────────────────────
     {
-      url: `${SITE_CONFIG.url}/`,
+      url: `${base}/`,
       lastModified: now,
       changeFrequency: 'daily',
       priority: 1.0,
     },
-    // ── News / Market hub ─────────────────────────────────────────────────────
     {
-      url: `${SITE_CONFIG.url}/news`,
+      url: `${base}/news`,
       lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.9,
+      changeFrequency: 'hourly',
+      priority: 0.95,
     },
-    // ── Auth ──────────────────────────────────────────────────────────────────
     {
-      url: `${SITE_CONFIG.url}/login`,
+      url: `${base}/login`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${base}/login?next=%2Fnews`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
-      url: `${SITE_CONFIG.url}/register`,
+      url: `${base}/register`,
       lastModified: now,
       changeFrequency: 'monthly',
-      priority: 0.6,
+      priority: 0.7,
     },
   ]
 }

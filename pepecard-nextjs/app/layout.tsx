@@ -17,11 +17,6 @@ export const metadata: Metadata = {
   creator: SITE_CONFIG.name,
   publisher: SITE_CONFIG.name,
   category: 'technology',
-  icons: {
-    icon: [{ url: '/favicon.ico', sizes: 'any' }],
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
-  },
   appleWebApp: {
     title: SITE_CONFIG.name,
     statusBarStyle: 'default',
@@ -49,7 +44,7 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://pepecard.store" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://pepecard.store" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="preload" as="image" href="/rectangle-logo.png" fetchPriority="high" />
         {EXTERNAL_STYLESHEETS.map((href) => (
           <link key={href} rel="stylesheet" href={href} />
         ))}
