@@ -3,72 +3,117 @@ import type { Metadata } from 'next'
 export const SITE_CONFIG = {
   name: 'PEPECARD Official',
   shortName: 'PEPECARD',
-  /** Primary public domain – all canonical URLs are built from this */
   url: 'https://www.pepecard.store',
   locale: 'en_US',
   twitter: '@pepecard',
-  defaultTitle: 'PEPECARD Official | Buy Pepecards & Crypto CC | pepecard.store',
+  defaultTitle: 'PEPECARD Official | #1 Pepecard Marketplace | pepecard.store',
   defaultDescription:
-    'PEPECARD Official – the premier marketplace for crypto trading cards, CC bases, world card mixes and refundable digital assets. Login securely at pepecard.store and explore verified bases from top sellers worldwide.',
+    'PEPECARD Official – the #1 marketplace to buy and sell pepecards, crypto CC bases, world mix cards and refundable digital assets. Official site: www.pepecard.store. Secure login, 90%+ valid rates, instant refunds. Trusted by verified sellers worldwide.',
   keywords: [
-    // Brand
+    // ── Core brand (exact + variations) ─────────────────────────────────
     'PEPECARD',
     'pepecard',
+    'pepe card',
+    'pepe cards',
     'pepecards',
     'pepecard official',
-    'pepecard store',
+    'pepecard official site',
+    'official pepecard',
+    'real pepecard',
+    'trusted pepecard',
+    'safe pepecard',
+
+    // ── Domain variants – captures users searching any TLD ───────────────
     'pepecard.store',
     'www.pepecard.store',
-    // Mirror domains / alternate spellings — kept so this site ranks
-    // for users who type the old domains into Google.
+    'pepecard.com',
+    'pepecard.net',
+    'pepecard.io',
+    'pepecard.cc',
+    'pepecard.in',
+    'pepecard.co',
+    'pepecard.xyz',
+    'pepecard.org',
+    'pepecard.info',
+    'pepecard.biz',
+    'pepecard.us',
+    'pepecard.uk',
+    'pepecard.eu',
     'pepecard.mobi',
-    'pepe card mobi',
-    'pepecard mobi',
-    'pepecard store official',
-    'pepecard zip',
     'pepecard.zip',
+    'pepecard.app',
+    'pepecard.me',
+    'pepecard.tv',
+    'pepecard.shop',
+    'pepecard.pro',
+    'pepecard store',
+    'pepecard store official',
     'pepecards.cc',
-    'pepecard cc',
-    'pepe.mobi',
-    'pepe mobi',
-    // Auth
+    'pepecards.com',
+
+    // ── Auth / login ─────────────────────────────────────────────────────
     'pepecard login',
     'pepecards login',
     'login pepecard',
     'pepecard sign in',
-    'pepecard.mobi login',
-    'pepecard mobi login',
-    'secure login pepecard',
+    'pepecard sign up',
     'pepecard portal',
-    // Market / product
-    'pepecard news',
-    'pepecard updates',
+    'pepecard secure login',
+    'pepecard.store login',
+    'pepecard.com login',
+    'pepecard.cc login',
+    'pepecard.mobi login',
+    'pepecard.io login',
+    'pepecard register',
+
+    // ── Products / market ─────────────────────────────────────────────────
     'pepecard market',
-    'pepecard announcements',
-    'pepecard seller',
+    'pepecard marketplace',
     'buy pepecard',
     'buy pepecards',
+    'pepecard seller',
+    'pepecard sellers',
+    'pepecard news',
+    'pepecard updates',
+    'pepecard announcements',
+    'pepecard market analysis',
+    'pepecard ticker',
+    'best pepecard site',
+    '#1 pepecard',
+    'pepecard alternative',
+
+    // ── CC / dumps / bases ────────────────────────────────────────────────
     'cc base',
-    'credit dump',
+    'cc bases',
+    'buy cc base',
+    'best cc base',
+    'valid cc base',
+    'fresh cc base',
+    'high valid cc',
+    'credit card base',
     'credit card dumps',
+    'credit dumps',
     'world mix cards',
+    'world mix cc',
     'refundable cc',
-    'pepe market',
-    'cards market',
-    'market analysis',
-    // Crypto
-    'pepecard crypto',
-    'pepecard trading',
+    'automatic refund cc',
+
+    // ── Crypto / digital assets ───────────────────────────────────────────
     'crypto trading card',
-    'digital assets',
-    'pepe crypto',
-    'secure crypto platform',
-    'pepecard web3',
+    'crypto trading cards',
+    'digital trading cards',
+    'trading card marketplace',
+    'pepecard crypto',
     'pepecard defi',
-    'best crypto cards',
-    // Generic
-    'trading platform',
-    'security updates',
+    'blockchain trading cards',
+    'digital assets marketplace',
+
+    // ── Typo / misspelling capture ────────────────────────────────────────
+    'pepcard',
+    'pepe card store',
+    'pepicard',
+    'pepecar',
+    'pepecards store',
   ],
   ogImage: '/og-image.png',
 } as const
@@ -92,7 +137,7 @@ export function buildMetadata(input: SeoInput = {}): Metadata {
   return {
     title,
     description,
-    keywords,
+    keywords: keywords.join(', '),
     alternates: { canonical: url },
     openGraph: {
       title,
@@ -114,16 +159,16 @@ export function buildMetadata(input: SeoInput = {}): Metadata {
     robots: input.noIndex
       ? { index: false, follow: false }
       : {
-        index: true,
-        follow: true,
-        googleBot: {
           index: true,
           follow: true,
-          'max-video-preview': -1,
-          'max-image-preview': 'large',
-          'max-snippet': -1,
+          googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+          },
         },
-      },
   }
 }
 
@@ -135,10 +180,11 @@ export function organizationJsonLd() {
     url: SITE_CONFIG.url,
     logo: {
       '@type': 'ImageObject',
-      url: new URL('/rectangle-logo.png', SITE_CONFIG.url).toString(),
-      width: 200,
-      height: 60,
+      url: `${SITE_CONFIG.url}/icon.png`,
+      width: 512,
+      height: 512,
     },
+    image: `${SITE_CONFIG.url}/og-image.png`,
     description: SITE_CONFIG.defaultDescription,
     sameAs: [
       'https://www.pepecard.store',
@@ -146,7 +192,15 @@ export function organizationJsonLd() {
       'https://pepecard.zip',
       'https://t.me/PepeServicePepe',
     ],
-    alternateName: ['PEPECARD', 'pepecard.mobi', 'pepecard.store', 'pepe card'],
+    alternateName: [
+      'PEPECARD',
+      'pepecard.store',
+      'pepecard.mobi',
+      'pepecard.cc',
+      'pepecard.zip',
+      'pepe card',
+      'pepecards',
+    ],
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer support',
@@ -160,6 +214,7 @@ export function websiteJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: SITE_CONFIG.name,
+    alternateName: ['PEPECARD', 'pepecard.store', 'pepecard.mobi', 'pepe card marketplace'],
     url: SITE_CONFIG.url,
     description: SITE_CONFIG.defaultDescription,
     inLanguage: 'en',
@@ -202,9 +257,6 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   }
 }
 
-/**
- * FAQ JSON-LD – useful for news / announcement pages to capture rich results.
- */
 export function faqJsonLd(faqs: { question: string; answer: string }[]) {
   return {
     '@context': 'https://schema.org',

@@ -17,16 +17,18 @@ export function middleware(request: NextRequest) {
 
   const hasSession = request.cookies.get(AUTH_COOKIE_NAME)?.value
 
+  // Root: logged in → /news, not logged in → /login
+  if (pathname === '/') {
+    return NextResponse.redirect(
+      new URL(hasSession ? '/news' : '/login', request.url)
+    )
+  }
+
   if (PUBLIC_PATHS.has(pathname)) {
     if ((pathname === '/login' || pathname === '/register') && hasSession) {
       return NextResponse.redirect(new URL('/news', request.url))
     }
-
     return NextResponse.next()
-  }
-
-  if (pathname === '/') {
-    return NextResponse.redirect(new URL('/news', request.url))
   }
 
   if (!hasSession) {

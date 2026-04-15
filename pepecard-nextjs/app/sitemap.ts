@@ -1,26 +1,16 @@
 import type { MetadataRoute } from 'next'
 import { SITE_CONFIG } from '@/lib/seo'
 
-/**
- * Next.js dynamic sitemap – served at /sitemap.xml
- * Domain: www.pepecard.store
- */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
-  const base = SITE_CONFIG.url
+  const base = SITE_CONFIG.url // https://www.pepecard.store
 
   return [
-    {
-      url: `${base}/`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
     {
       url: `${base}/news`,
       lastModified: now,
       changeFrequency: 'hourly',
-      priority: 0.95,
+      priority: 1.0,
     },
     {
       url: `${base}/login`,
