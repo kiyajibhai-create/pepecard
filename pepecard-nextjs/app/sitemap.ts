@@ -7,6 +7,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
+      url: `${base}/`,
+      lastModified: now,
+      changeFrequency: 'hourly',
+      priority: 1.0,
+    },
+    {
       url: `${base}/news`,
       lastModified: now,
       changeFrequency: 'hourly',
@@ -17,12 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.85,
-    },
-    {
-      url: `${base}/login?next=%2Fnews`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
     },
     {
       url: `${base}/register`,
