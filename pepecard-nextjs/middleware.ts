@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { AUTH_COOKIE_NAME } from '@/lib/auth'
 
-const PUBLIC_PATHS = new Set(['/login', '/robots.txt', '/sitemap.xml'])
+const PUBLIC_PATHS = new Set(['/login', '/register', '/robots.txt', '/sitemap.xml'])
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -18,7 +18,7 @@ export function middleware(request: NextRequest) {
   const hasSession = request.cookies.get(AUTH_COOKIE_NAME)?.value
 
   if (PUBLIC_PATHS.has(pathname)) {
-    if (pathname === '/login' && hasSession) {
+    if ((pathname === '/login' || pathname === '/register') && hasSession) {
       return NextResponse.redirect(new URL('/news', request.url))
     }
 

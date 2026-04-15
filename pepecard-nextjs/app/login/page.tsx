@@ -5,53 +5,14 @@ import { useRouter } from 'next/navigation'
 import { AUTH_COOKIE_NAME } from '@/lib/auth'
 import { createClient } from '@/utils/supabase/client'
 
-/* ── Math CAPTCHA ──────────────────────────────────────────────────── */
 function mkCaptcha() {
   const ops = ['+', '-', '×']
   const op = ops[Math.floor(Math.random() * ops.length)]
-  let a = Math.floor(Math.random() * 8) + 2
+  const a = Math.floor(Math.random() * 8) + 2
   let b = Math.floor(Math.random() * (op === '-' ? a - 1 : 8)) + 1
   if (op === '-' && b >= a) b = a - 1
   const answer = op === '+' ? a + b : op === '-' ? a - b : a * b
   return { question: `${a} ${op} ${b} = ?`, answer }
-}
-
-/* ── Globe SVG ─────────────────────────────────────────────────────── */
-function GlobeIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <line x1="2" y1="12" x2="22" y2="12" />
-      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-    </svg>
-  )
-}
-
-/* ── Eye SVGs ──────────────────────────────────────────────────────── */
-function EyeIcon({ open }: { open: boolean }) {
-  if (open) {
-    return (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-        <circle cx="12" cy="12" r="3" />
-      </svg>
-    )
-  }
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
-      <line x1="1" y1="1" x2="23" y2="23" />
-    </svg>
-  )
-}
-
-/* ── Checked SVG ───────────────────────────────────────────────────── */
-function CheckIcon() {
-  return (
-    <svg aria-hidden="true" focusable="false" viewBox="0 0 1024 1024" width="12" height="12" fill="currentColor" className="arco-checkbox-icon-check">
-      <path d="M428.288 809.856L158.464 540.032l53.248-53.248 214.272 214.272 400.128-482.56 55.552 46.08L428.288 809.856z" fill="currentColor"></path>
-    </svg>
-  )
 }
 
 export default function LoginPage() {
@@ -206,7 +167,7 @@ export default function LoginPage() {
 
         <style jsx global>{`
           .passphrase-container[data-v-5c7dfcf3] {
-            background: url('https://pepecard.mobi/assets/register-bg-cgbfI5jC.jpg') no-repeat;
+            background: url('/assets/register-bg-cgbfI5jC.jpg') no-repeat;
             background-size: 100% 100%;
             min-width: 100vw;
             min-height: 100vh;
@@ -290,7 +251,7 @@ export default function LoginPage() {
         <div data-v-a01521a5 className="center-left">
           <div data-v-99245315 data-v-a01521a5 className="w-full h-full flex justify-center items-center flex-col">
             <h1 data-v-99245315>WELCOME</h1>
-            <img data-v-99245315 src="/rectangle-logo.png" className="w-4/5 -ml-[1.5rem]" alt="" />
+            <img data-v-99245315 src="/rectangle-logo.png" className="w-4/5 -ml-[1.5rem]" alt="PEPECARD Official logo" width={400} height={120} fetchPriority="high" decoding="async" />
           </div>
         </div>
         <div data-v-a01521a5 className="flex-1 bg-white rounded-sm sm:rounded-none relative">
@@ -387,7 +348,7 @@ export default function LoginPage() {
                   <button data-v-1e97eb9e className="arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-large arco-btn-status-normal flex-1 uppercase noto-sans" type="submit">
                     login
                   </button>
-                  <button data-v-1e97eb9e className="arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-large arco-btn-status-normal flex-1 uppercase noto-sans" type="button">
+                  <button data-v-1e97eb9e className="arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-large arco-btn-status-normal flex-1 uppercase noto-sans" type="button" onClick={() => router.push('/register')}>
                     register
                   </button>
                 </div>

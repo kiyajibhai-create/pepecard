@@ -308,7 +308,7 @@ export async function getAllArticles(): Promise<Article[]> {
 1. Push the `pepecard-nextjs` folder to GitHub.
 2. In Vercel, create a new project and import that repository.
 3. Set the Root Directory to `pepecard-nextjs` if the repository contains multiple folders.
-4. Add the environment variable `NEXT_PUBLIC_SITE_URL` with your production domain, for example `https://pepecard.mobi`.
+4. Add the environment variable `NEXT_PUBLIC_SITE_URL` with your production domain, for example `https://pepecard.store`.
 5. Use these Vercel project settings:
 
 | Setting | Value |

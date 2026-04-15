@@ -4,7 +4,7 @@ export const SITE_CONFIG = {
   name: 'PEPECARD Official',
   shortName: 'PEPECARD',
   /** Primary public domain – all canonical URLs are built from this */
-  url: 'https://pepecard.store',
+  url: 'https://www.pepecard.store',
   locale: 'en_US',
   twitter: '@pepecard',
   defaultTitle: 'PEPECARD Official | Buy Pepecards & Crypto CC | pepecard.store',
@@ -18,20 +18,26 @@ export const SITE_CONFIG = {
     'pepecard official',
     'pepecard store',
     'pepecard.store',
-    // Domains / mirrors
+    'www.pepecard.store',
+    // Mirror domains / alternate spellings — kept so this site ranks
+    // for users who type the old domains into Google.
     'pepecard.mobi',
+    'pepe card mobi',
     'pepecard mobi',
-    'pepe.mobi',
+    'pepecard store official',
     'pepecard zip',
     'pepecard.zip',
     'pepecards.cc',
     'pepecard cc',
+    'pepe.mobi',
+    'pepe mobi',
     // Auth
     'pepecard login',
     'pepecards login',
     'login pepecard',
     'pepecard sign in',
-    'pepe mobi login',
+    'pepecard.mobi login',
+    'pepecard mobi login',
     'secure login pepecard',
     'pepecard portal',
     // Market / product
@@ -93,7 +99,7 @@ export function buildMetadata(input: SeoInput = {}): Metadata {
       description,
       url,
       siteName: SITE_CONFIG.name,
-      images: [{ url: image, width: 1200, height: 630, alt: title, type: 'image/jpeg' }],
+      images: [{ url: image, width: 1200, height: 630, alt: title, type: 'image/png' }],
       type: 'website',
       locale: SITE_CONFIG.locale,
     },
@@ -108,16 +114,16 @@ export function buildMetadata(input: SeoInput = {}): Metadata {
     robots: input.noIndex
       ? { index: false, follow: false }
       : {
+        index: true,
+        follow: true,
+        googleBot: {
           index: true,
           follow: true,
-          googleBot: {
-            index: true,
-            follow: true,
-            'max-video-preview': -1,
-            'max-image-preview': 'large',
-            'max-snippet': -1,
-          },
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
         },
+      },
   }
 }
 
@@ -135,13 +141,12 @@ export function organizationJsonLd() {
     },
     description: SITE_CONFIG.defaultDescription,
     sameAs: [
-      'https://pepecard.store',
       'https://www.pepecard.store',
-      'https://pepecard.mobi',
-      'https://pepe.mobi',
+      'https://pepecard.store',
       'https://pepecard.zip',
       'https://t.me/PepeServicePepe',
     ],
+    alternateName: ['PEPECARD', 'pepecard.mobi', 'pepecard.store', 'pepe card'],
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer support',

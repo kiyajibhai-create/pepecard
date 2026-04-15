@@ -20,7 +20,6 @@ export const metadata: Metadata = buildMetadata({
     'credit dump',
     'pepecard seller',
     'pepecard zip',
-    'pepe mobi',
     'refundable cc',
     'world mix cards',
     'pepe market',
@@ -476,31 +475,31 @@ export default function NewsPage() {
 
                               <p style={{ fontSize: '24px', marginBottom: '20px' }}>
                                 <a
-                                  href="https://pepecard.mobi"
-                                  target="_blank"
-                                  rel="noreferrer"
+                                  href="https://www.pepecard.store"
+                                  rel="canonical"
                                   style={{ color: '#1a73e8' }}
                                 >
-                                  pepecard.mobi
-                                </a>
-                                &nbsp; - &nbsp;
-                                <a
-                                  href="https://pepe.mobi"
-                                  target="_blank"
-                                  rel="noreferrer"
-                                  style={{ color: '#1a73e8' }}
-                                >
-                                  pepe.mobi
+                                  www.pepecard.store
                                 </a>
                                 &nbsp; - &nbsp;
                                 <a
                                   href="https://pepecard.zip"
                                   target="_blank"
-                                  rel="noreferrer"
+                                  rel="noopener nofollow"
                                   style={{ color: '#1a73e8' }}
                                 >
                                   pepecard.zip
                                 </a>
+                              </p>
+
+                              <p style={{ fontSize: '14px', marginBottom: '20px', color: '#555' }}>
+                                Formerly known as <strong>pepecard.mobi</strong>,{' '}
+                                <strong>pepe.mobi</strong> and <strong>pepecards.cc</strong> — the
+                                official domain is now{' '}
+                                <a href="https://www.pepecard.store" rel="canonical" style={{ color: '#1a73e8' }}>
+                                  www.pepecard.store
+                                </a>
+                                . All other lookalikes are scams.
                               </p>
 
                               <p style={{ fontSize: '18px' }}>
@@ -517,7 +516,7 @@ export default function NewsPage() {
                                 <a
                                   href="https://t.me/PepeServicePepe"
                                   target="_blank"
-                                  rel="noreferrer"
+                                  rel="noopener nofollow"
                                 >
                                   @PepeServicePepe
                                 </a>
