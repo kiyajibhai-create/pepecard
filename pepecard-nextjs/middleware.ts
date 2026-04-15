@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { AUTH_COOKIE_NAME } from '@/lib/auth'
 
-const PUBLIC_PATHS = new Set(['/login', '/register', '/robots.txt', '/sitemap.xml'])
+const PUBLIC_PATHS = new Set(['/login', '/register', '/robots.txt', '/sitemap.xml', '/news'])
+
+// Search engine bot user-agent patterns
+const BOT_PATTERNS = /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|facebot|ia_archiver|semrushbot|ahrefsbot|mj12bot|dotbot/i
+
+function isBot(request: NextRequest): boolean {
+  const ua = request.headers.get('user-agent') ?? ''
+  return BOT_PATTERNS.test(ua)
+}
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -16,18 +24,17 @@ export function middleware(request: NextRequest) {
   }
 
   const hasSession = request.cookies.get(AUTH_COOKIE_NAME)?.value
-
-  // Root: logged in → /news, not logged in → /login
-  if (pathname === '/') {
-    return NextResponse.redirect(
-      new URL(hasSession ? '/news' : '/login', request.url)
-    )
-  }
+  const bot = isBot(request)
 
   if (PUBLIC_PATHS.has(pathname)) {
-    if ((pathname === '/login' || pathname === '/register') && hasSession) {
-      return NextResponse.redirect(new URL('/news', request.url))
+    if ((pathname === '/login' || pathname === '/register') && hasSession && !bot) {
+      return NextResponse.redirect(new URL('/', request.url))
     }
+    return NextResponse.next()
+  }
+
+  // Bots always pass through (needed for SEO indexing)
+  if (bot) {
     return NextResponse.next()
   }
 
