@@ -6,7 +6,7 @@ import { EXTERNAL_STYLESHEETS } from '@/lib/stylesheets'
 import JsonLd from '@/components/JsonLd'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_CONFIG.url),
+  metadataBase: new URL('https://www.pepecard.store'),
   ...buildMetadata(),
   title: {
     default: SITE_CONFIG.defaultTitle,
@@ -42,8 +42,8 @@ export default function RootLayout({
   return (
     <html lang="en" style={{ fontSize: '14px' }}>
       <head>
-        <link rel="preconnect" href="https://pepecard.store" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://pepecard.store" />
+        <link rel="preconnect" href="https://www.pepecard.store" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.pepecard.store" />
         <link rel="preload" as="image" href="/rectangle-logo.png" fetchPriority="high" />
         {EXTERNAL_STYLESHEETS.map((href) => (
           <link key={href} rel="stylesheet" href={href} />

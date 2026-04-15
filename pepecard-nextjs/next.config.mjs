@@ -15,21 +15,41 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // non-www → www (consolidates all link equity to canonical)
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'pepecard.store' }],
         destination: 'https://www.pepecard.store/:path*',
         permanent: true,
       },
+      // old domain mirrors → www canonical (301 tells Google to transfer authority)
       {
         source: '/:path*',
-        has: [{ type: 'host', value: '(pepecard|pepe)\\.(mobi|zip|cc)' }],
+        has: [{ type: 'host', value: 'pepecard.mobi' }],
         destination: 'https://www.pepecard.store/:path*',
         permanent: true,
       },
       {
         source: '/:path*',
-        has: [{ type: 'host', value: 'pepecards\\.cc' }],
+        has: [{ type: 'host', value: 'www.pepecard.mobi' }],
+        destination: 'https://www.pepecard.store/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'pepe.mobi' }],
+        destination: 'https://www.pepecard.store/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'pepecard.zip' }],
+        destination: 'https://www.pepecard.store/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'pepecards.cc' }],
         destination: 'https://www.pepecard.store/:path*',
         permanent: true,
       },

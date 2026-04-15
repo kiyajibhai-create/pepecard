@@ -3,28 +3,61 @@ import Layout from '../../components/Layout'
 import JsonLd from '@/components/JsonLd'
 import { buildMetadata, webPageJsonLd } from '@/lib/seo'
 
-const NEWS_TITLE = 'PEPECARD Market | Official Secure Access & Market Ticker'
+const NEWS_TITLE = 'PEPECARD Market | Best CC Bases, World Mix Cards & Verified Sellers | #1 Pepecard Trading'
 const NEWS_DESCRIPTION =
-  'Explore the top recommended PEPECARD bases, valid rate statistics, world card mixes, and guaranteed refundable card stocks. Maximize your crypto trading on PEPECARD Official.'
+  'Explore PEPECARD Official market with top-rated CC bases, world mix cards, verified sellers & 90% valid rates. Buy credit card dumps, fresh bases & refundable cards. Real pepecard marketplace (not pepecard.mobi). Secure trading with instant refunds.'
 
 export const metadata: Metadata = buildMetadata({
   title: NEWS_TITLE,
   description: NEWS_DESCRIPTION,
   path: '/news',
   keywords: [
+    // PRIMARY - High search volume
     'pepecard',
-    'pepecards',
-    'buy pepecards',
+    'pepe card',
+    'buy pepecard',
     'pepecard market',
+    'pepecard marketplace',
+    // CC Bases - Main products
     'cc base',
-    'credit dump',
-    'pepecard seller',
-    'pepecard zip',
-    'refundable cc',
+    'cc bases',
+    'buy cc base',
+    'best cc base',
+    'valid cc base',
+    'fresh cc base',
+    'credit card base',
+    'credit card bases',
+    'high valid cc',
+    // World mix/dumps
     'world mix cards',
-    'pepe market',
+    'world mix cc',
+    'credit card dumps',
+    'credit dumps',
+    // Trading/Sellers
+    'pepecard seller',
+    'verified sellers',
+    'trusted sellers',
+    'top sellers pepecard',
+    'crypto trading card',
+    'trading card market',
+    // Properties featured
+    'refundable cc',
+    'automatic refund',
+    '90% valid rate',
+    'instant refund',
+    // News/Updates
     'pepecard news',
+    'pepecard updates',
+    'pepecard market analysis',
     'pepecard announcements',
+    'pepecard trends',
+    'pepecard ticker',
+    // Positioning
+    'best pepecard site',
+    'official pepecard',
+    'real pepecard',
+    'pepecard.store',
+    'safe pepecard',
   ],
 })
 
@@ -493,13 +526,11 @@ export default function NewsPage() {
                               </p>
 
                               <p style={{ fontSize: '14px', marginBottom: '20px', color: '#555' }}>
-                                Formerly known as <strong>pepecard.mobi</strong>,{' '}
-                                <strong>pepe.mobi</strong> and <strong>pepecards.cc</strong> — the
-                                official domain is now{' '}
+                                ⚠️ <strong>WARNING:</strong> The only official PEPECARD domain is{' '}
                                 <a href="https://www.pepecard.store" rel="canonical" style={{ color: '#1a73e8' }}>
                                   www.pepecard.store
                                 </a>
-                                . All other lookalikes are scams.
+                                . Any other domain (including .mobi, .cc, or similar) is a <strong>SCAM</strong>. Never trust lookalike sites.
                               </p>
 
                               <p style={{ fontSize: '18px' }}>
